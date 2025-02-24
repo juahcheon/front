@@ -1,0 +1,23 @@
+name: Sync Fork
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # 매일 자정(UTC)에 실행
+  workflow_dispatch:  # 수동 실행 가능
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Sync with upstream
+        run: |
+          git config --global juahcheon "github-actions[bot]"
+          git config --global juacheon@gmail.com "github-actions[bot]@users.noreply.github.com"
+          git remote add upstream https://github.com/your-weddy/front.git
+          git fetch upstream
+          git checkout main
+          git merge upstream/main --allow-unrelated-histories
+          git push origin main
