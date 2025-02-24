@@ -7,7 +7,7 @@ interface WorkSpaceState {
 }
 
 const useSideMenuStore = create<WorkSpaceState>((set) => ({
-  sideMenuState: false, // 초기 상태
+  sideMenuState: true, // 초기 상태
   setSideMenuState: (text) => set({ sideMenuState: text }), // 상태 업데이트
 }));
 

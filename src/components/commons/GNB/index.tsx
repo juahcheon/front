@@ -1,6 +1,9 @@
 import dblArrow from "@/../public/icons/dblArrow.svg";
 import logoImg from "@/../public/images/Homepage Logo.svg";
+import { getMyData } from "@/lib/apis/authme";
+import useLoginData from "@/lib/store/loginData";
 import useSideMenuStore from "@/lib/store/sideMenu";
+import { useQuery } from "@tanstack/react-query";
 import classNames from "classnames/bind";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
@@ -14,6 +17,7 @@ const cn = classNames.bind(styles);
 export default function GNB() {
   const { data: session } = useSession();
   const { sideMenuState, setSideMenuState } = useSideMenuStore();
+  const { data: loginData, setData } = useLoginData();
   const [page, setPage] = useState<String>("");
   const router = useRouter();
 
@@ -30,7 +34,7 @@ export default function GNB() {
     console.log("Session 데이터:", session);
 
     if (session?.accessToken) {
-      fetch("http://localhost:8080/auth/login/kakao", {
+      fetch("https://your-weddy.pe.kr/auth/login/kakao", {
         method: "POST",
         credentials: "include",
         headers: {
@@ -44,6 +48,13 @@ export default function GNB() {
     }
   }, [session]);
 
+  const { data, isSuccess } = useQuery({
+    queryKey: ["getMyData"],
+    queryFn: getMyData,
+  });
+  useEffect(() => {
+    setData(data);
+  }, [isSuccess]);
   return (
     <nav className={cn("navWrap")}>
       {page === "/workSpace" ? (
@@ -92,7 +103,7 @@ export default function GNB() {
       )}
 
       <div className={cn("lonInWrap")}>
-        {!session ? (
+        {!loginData ? (
           <button className={cn("logInBtn")} onClick={handleLogin}>
             {" "}
             로그인

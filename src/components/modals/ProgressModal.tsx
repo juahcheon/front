@@ -4,26 +4,27 @@ import styles from "./style.module.scss";
 
 const cn = classNames.bind(styles);
 
-export default function ProgressModal({
-  item,
-  onChange,
-}: {
-  item: {
-    id: number;
-    title: string;
-    progress: string;
-    assignee: string;
-    date: string;
-    state: boolean;
-    amount: string;
-  };
-  onChange: (id: number, newProgress: "시작전" | "진행중" | "완료") => void;
-}) {
+export default function ProgressModal({ item, onChange }: any) // {
+//   item: {
+//     id: number;
+//     largeCatItemId: number;
+//     title: string;
+//     dueDate: string;
+//     assigneeName: string;
+//     statusName: string;
+//   };
+//   onChange: (newProgress: "시작전" | "진행중" | "완료") => void;
+// }
+{
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentStatus, setCurrentStatus] = useState<string>(
+    item.statusName || "시작전"
+  );
 
-  const handleProgressChange = (newProgress: "시작전" | "진행중" | "완료") => {
-    onChange(item.id, newProgress); // 부모 컴포넌트로 상태 변경 요청
-    setIsModalOpen(false); // 모달 닫기
+  const handleStatusChange = (newProgress: "시작전" | "진행중" | "완료") => {
+    setCurrentStatus(newProgress);
+    onChange(newProgress);
+    setIsModalOpen(false);
   };
 
   return (
@@ -31,36 +32,35 @@ export default function ProgressModal({
       <button
         className={cn(
           "progress",
-          item.progress === "시작전" && "before",
-          item.progress === "진행중" && "now",
-          item.progress === "완료" && "complete"
+          currentStatus === "시작전" && "before",
+          currentStatus === "진행중" && "now",
+          currentStatus === "완료" && "complete"
         )}
         onClick={() => setIsModalOpen(!isModalOpen)}
       >
-        <p>{item.progress}</p>
+        <p>{currentStatus}</p>
         <span>∨</span>
       </button>
 
       {isModalOpen && (
         <div>
           <ul className={cn("modalUL")}>
-            {["시작전", "진행중", "완료"].map((status) => (
-              <li key={status}>
+            {["시작전", "진행중", "완료"].map((statusName) => (
+              <li key={statusName}>
                 <button
                   className={cn(
                     "progress",
-                    status === "시작전" && "before",
-                    status === "진행중" && "now",
-                    status === "완료" && "complete"
+                    statusName === "시작전" && "before",
+                    statusName === "진행중" && "now",
+                    statusName === "완료" && "complete"
                   )}
-                  onClick={() => {
-                    handleProgressChange(
-                      status as "시작전" | "진행중" | "완료"
-                    );
-                    setIsModalOpen(false);
-                  }}
+                  onClick={() =>
+                    handleStatusChange(
+                      statusName as "시작전" | "진행중" | "완료"
+                    )
+                  }
                 >
-                  {status}
+                  {statusName}
                   <span className={cn("modalSpan")}>∨</span>
                 </button>
               </li>

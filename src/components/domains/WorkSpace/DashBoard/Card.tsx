@@ -7,6 +7,7 @@ import classNames from "classnames/bind";
 import Image from "next/image";
 import { useState } from "react";
 import styles from "./style.module.scss";
+import useWorkSpaceStore from "@/lib/store/workSpace";
 
 const cn = classNames.bind(styles);
 
@@ -19,42 +20,47 @@ interface Card {
     assigneeName: string;
     statusName: string;
   };
-  checklistId: any;
+  checklistId: number;
   onOpenModal?: (item: any) => void;
 }
 
 export default function Card({ item, checklistId, onOpenModal }: Card) {
   const { setChoiceCard } = useCardStore();
   const { color } = useColorStore();
-  const statusName = Number(item.statusName);
+  const statusName = item.statusName;
   const itemDate = item?.dueDate === "string" ? item.dueDate.split("T")[0] : "";
 
   const ids = {
     checklistId: checklistId,
-    largeCatItemId: item.largeCatItemId,
-    smallCatItemId: item.id,
+    largeCatItemId: item.largeCatItemId || 0,
+    smallCatItemId: item.id || 0,
   };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const handleOpenModal = () => {
+    onOpenModal?.(item);
+  };
+
   const choice = () => {
     setChoiceCard(String(item.id));
   };
+
   return (
     <>
       <div
         className={item.statusName ? cn("cardWrap") : cn("cardWrapNone")}
         style={{ border: `1px solid ${color}` }}
-        onClick={() => onOpenModal?.(item)}
+        onClick={handleOpenModal}
       >
         <div
           className={cn("cardState", {
-            cardState1: statusName === 1,
-            cardState2: statusName === 2,
-            cardState3: statusName === 3,
+            cardState1: statusName === "시작전",
+            cardState2: statusName === "진행중",
+            cardState3: statusName === "완료",
           })}
         >
-          {statusName === 1 ? "시작전" : statusName === 2 ? "진행중" : "완료"}
+          {statusName}
         </div>
 
         <div className={cn("title")} onClick={choice}>
@@ -73,13 +79,8 @@ export default function Card({ item, checklistId, onOpenModal }: Card) {
           <p>{itemDate}</p>
         </div>
       </div>
-      {isModalOpen && (
-        <CheckListPage
-          onClose={() => setIsModalOpen(false)}
-          item={item}
-          ids={ids}
-        />
-      )}
+
+      
     </>
   );
 }

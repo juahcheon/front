@@ -19,6 +19,7 @@ export const getCard = async (memberId: any) => {
     console.error(e);
   }
 };
+
 export const postCard = async (memberId: any, title: string) => {
   try {
     const res = await instance.post(`/checklist/large-cat-item`, {
@@ -30,12 +31,16 @@ export const postCard = async (memberId: any, title: string) => {
     console.error(e);
   }
 };
-export const changeCardName = async (memberId: any, id: any, newTitle:string) => {
+export const changeCardName = async (
+  memberId: any,
+  id: any,
+  newTitle: string
+) => {
   try {
     const res = await instance.patch(`/checklist/large-cat-item`, {
       memberId: memberId,
       id: id,
-      editedTitle : newTitle
+      editedTitle: newTitle,
     });
     return res;
   } catch (e) {
@@ -46,7 +51,8 @@ export const changeCardName = async (memberId: any, id: any, newTitle:string) =>
 export const deleteCard = async (memberId: any, id: any) => {
   try {
     const res = await instance.patch(`/checklist/large-cat-item/delete`, {
-       memberId, id 
+      memberId,
+      id,
     });
     return res.data;
   } catch (e) {
@@ -56,7 +62,20 @@ export const deleteCard = async (memberId: any, id: any) => {
 
 export const addSmallCard = async (data: any) => {
   try {
-    const res = await instance.post(`/checklist/large-cat-item/small-cat-Item/add-item`, 
+    const res = await instance.post(
+      `/checklist/large-cat-item/small-cat-Item/add-item`,
+      data
+    );
+    return res;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export const moveSmallCard = async (data: any) => {
+  try {
+    const res = await instance.patch(
+      `/checklist/large-cat-item/small-cat-Item/move-item`,
       data
     );
     return res;
