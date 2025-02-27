@@ -1,7 +1,7 @@
 .checkModalWrap {
   width: 45%;
-  height: 100%;
-  position: absolute;
+  height: 100vh;
+  position: fixed;
   background-color: white;
   right: 0;
   top: 0;
@@ -11,10 +11,14 @@
 }
 
 .modalContents {
+  width: 100%;
+  height: 95%;
   padding: 4rem 6rem 0 6rem;
 }
 
 .modalForm {
+  width: 100%;
+  height: 100%;
   margin-top: 1rem;;
 
   & > * {
@@ -109,6 +113,8 @@
 }
 
 .detail {
+  width: 100%;
+  height: 45%;
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -124,8 +130,32 @@
 }
 
 .modalDetail {
+  width: 100%;
+  height: 100%;
   font-size: 1.5rem;
   position: relative;
+  flex-grow: 1;
+
+  & > textarea {
+    width: 100%;
+    height: 100%;
+    resize: none;
+    overflow-y: auto;
+  }
+
+  & > .scroll::-webkit-scrollbar {
+    width: 15px;  
+  }
+
+  & > .scroll::-webkit-scrollbar-thumb {
+    background: #7034F3;
+    border-radius: 10px;
+  }
+
+  & > .scroll::-webkit-scrollbar-track {
+    background: #eee;
+    border-radius: 10px;
+  }
 }
 
 .placeholder {
@@ -147,9 +177,6 @@
   & > .footerContents {
     width: 100%;
     height: 45%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     margin-bottom: 3rem;
   }
 
@@ -183,3 +210,14 @@
 .modalSpan {
   margin-left: 0.5rem;
 }
+
+
+.editorWrap {
+  display: flex;
+  justify-content: space-around;
+
+  & > button {
+    
+  }
+}
+

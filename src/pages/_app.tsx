@@ -21,9 +21,11 @@ export default function App({ Component, pageProps }: AppProps) {
           {pageProps.isLoading ? (
             <div>is Loading...</div>
           ) : (
+          <>
             <Component {...pageProps} />
+            <GNB />
+          </>
           )}
-          <GNB />
         </SessionProvider>
       </RecoilRoot>
       <ReactQueryDevtools initialIsOpen={false} />

@@ -4,6 +4,7 @@ import KakaoProvider from "next-auth/providers/kakao";
 declare module "next-auth" {
     interface Session {
         accessToken?: string;
+        user: DefaultSession["user"];
     }
 
     interface JWT {

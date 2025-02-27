@@ -4,8 +4,8 @@ import DashBoardMore from "@/components/domains/WorkSpace/DashBoardMore";
 import SideMenu from "@/components/domains/WorkSpace/SideMenu";
 import SpaceSearch from "@/components/domains/WorkSpace/SpaceSearch";
 import CheckListPage from "@/components/modals/CheckListPage";
-import { SmallCatItem } from "@/lib/apis/types/types";
-import { getCard, getMember, moveSmallCard } from "@/lib/apis/workSpace";
+import { getCard, getItem, getMember, moveSmallCard } from "@/lib/apis/workSpace";
+
 import useLoginData from "@/lib/store/loginData";
 import useColorStore from "@/lib/store/mainColor";
 import useSideMenuStore from "@/lib/store/sideMenu";
@@ -18,6 +18,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import styles from "./style.module.scss";
+import { SmallCatItem } from "@/lib/apis/types/types";
 
 const cn = classNames.bind(styles);
 
@@ -30,7 +31,6 @@ export default function WorkSpace() {
   const { data: loginData } = useLoginData();
   const { color } = useColorStore();
   const { checklistId, selectedItem, setSelectedItem } = useWorkSpaceStore();
-  const router = useRouter();
 
   const { data: cardDatas, isSuccess } = useQuery({
     queryKey: ["cardData", cardId, cardLength],
@@ -41,6 +41,8 @@ export default function WorkSpace() {
     queryKey: ["memberData", cardId],
     queryFn: () => getMember(cardId),
   });
+
+
 
   const handleOpenModal = (item: SmallCatItem) => {
     setSelectedItem(item);

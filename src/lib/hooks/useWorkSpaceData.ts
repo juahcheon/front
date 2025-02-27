@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query';
 import { LargeCatItem } from '../apis/types/types';
 import { instance } from '../apis/axios';
 
-
 const fetchWorkSpaceData = async (checklistId: number) => {
   const { data } = await instance.get<LargeCatItem[]>(`/checklist/large-cat-item/${checklistId}`);
   return data;

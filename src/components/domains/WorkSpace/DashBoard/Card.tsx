@@ -1,13 +1,10 @@
 import date from "@/../public/icons/date.svg";
 import assignee from "@/../public/icons/people.svg";
-import CheckListPage from "@/components/modals/CheckListPage";
 import useCardStore from "@/lib/store/choiceCard";
 import useColorStore from "@/lib/store/mainColor";
 import classNames from "classnames/bind";
 import Image from "next/image";
-import { useState } from "react";
 import styles from "./style.module.scss";
-import useWorkSpaceStore from "@/lib/store/workSpace";
 
 const cn = classNames.bind(styles);
 
@@ -29,14 +26,6 @@ export default function Card({ item, checklistId, onOpenModal }: Card) {
   const { color } = useColorStore();
   const statusName = item.statusName;
   const itemDate = item?.dueDate === "string" ? item.dueDate.split("T")[0] : "";
-
-  const ids = {
-    checklistId: checklistId,
-    largeCatItemId: item.largeCatItemId || 0,
-    smallCatItemId: item.id || 0,
-  };
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpenModal = () => {
     onOpenModal?.(item);
@@ -79,8 +68,6 @@ export default function Card({ item, checklistId, onOpenModal }: Card) {
           <p>{itemDate}</p>
         </div>
       </div>
-
-      
     </>
   );
 }

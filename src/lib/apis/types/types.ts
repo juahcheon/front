@@ -5,6 +5,8 @@ export interface SmallCatItem {
   dueDate: string;
   assigneeName: string;
   statusName: string;
+  amount: number;
+  body: string;
 }
 
 export interface LargeCatItem {

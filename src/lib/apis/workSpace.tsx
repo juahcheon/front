@@ -1,3 +1,4 @@
+import axios from "axios";
 import { instance } from "./axios";
 
 export const getMember = async (memberId: any) => {
@@ -13,6 +14,23 @@ export const getCard = async (memberId: any) => {
   try {
     const res = await instance.get(
       `/checklist/large-cat-item?memberId=${memberId}`
+    );
+    return res.data;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export const getItem = async (checklistId: any, largeCatItemId:any, smallCatItemId: any) => {
+  try {
+    const res = await instance.get(
+      `/checklist/large-cat-item/small-cat-Item/item`, {
+        params: {
+          checklistId,
+          largeCatItemId,
+          smallCatItemId
+        }
+      }
     );
     return res.data;
   } catch (e) {

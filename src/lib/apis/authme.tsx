@@ -16,3 +16,16 @@ export const getMyToken = async () => {
     console.error(e);
   }
 };
+export const logoutAPI = async () => {
+  try {
+    const res = await instance.post("/auth/logout", {
+      headers: {
+        'Cache-Control': 'no-cache',
+        'Pragma': 'no-cache'
+      }
+    });
+    return res.data;
+  } catch (e) {
+    console.error(e);
+  }
+};

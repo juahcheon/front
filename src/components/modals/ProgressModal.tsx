@@ -4,18 +4,7 @@ import styles from "./style.module.scss";
 
 const cn = classNames.bind(styles);
 
-export default function ProgressModal({ item, onChange }: any) // {
-//   item: {
-//     id: number;
-//     largeCatItemId: number;
-//     title: string;
-//     dueDate: string;
-//     assigneeName: string;
-//     statusName: string;
-//   };
-//   onChange: (newProgress: "시작전" | "진행중" | "완료") => void;
-// }
-{
+export default function ProgressModal({ item, onChange }: any) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentStatus, setCurrentStatus] = useState<string>(
     item.statusName || "시작전"

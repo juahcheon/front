@@ -1,6 +1,6 @@
 import dblArrow from "@/../public/icons/dblArrow.svg";
 import logoImg from "@/../public/images/Homepage Logo.svg";
-import { getMyData } from "@/lib/apis/authme";
+import { getMyData, logoutAPI } from "@/lib/apis/authme";
 import useLoginData from "@/lib/store/loginData";
 import useSideMenuStore from "@/lib/store/sideMenu";
 import { useQuery } from "@tanstack/react-query";
@@ -18,17 +18,13 @@ export default function GNB() {
   const { data: session } = useSession();
   const { sideMenuState, setSideMenuState } = useSideMenuStore();
   const { data: loginData, setData } = useLoginData();
-  const [page, setPage] = useState<String>("");
+  const [ page, setPage ] = useState<String>("");
   const router = useRouter();
+  const [ isLoggingOut, setIsLoggingOut ] = useState(false);
 
   useEffect(() => {
-    console.log(router.pathname);
     setPage(router.pathname);
   }, [router]);
-
-  const handleLogin = () => {
-    router.push("/logIn");
-  };
 
   useEffect(() => {
     console.log("Session 데이터:", session);
@@ -43,18 +39,55 @@ export default function GNB() {
         body: JSON.stringify({ token: session.accessToken }),
       })
         .then((res) => res.json())
-        .then((data) => console.log("쿠키 설정 완료", data))
+        .then((data) => {
+          console.log("쿠키 설정 완료", data);
+        })
         .catch((err) => console.error("쿠키 설정 실패", err));
     }
   }, [session]);
 
+  const handleLogin = () => {
+    router.push("/logIn");
+  };
+
+  const handleLogout = async () => {
+    setIsLoggingOut(true);
+    setData(null);
+    try {
+      localStorage.setItem('isLoggedOut', 'true');
+      localStorage.removeItem('userData');
+      localStorage.removeItem('isLoggedIn');
+      
+      await logoutAPI();
+
+      router.push("/");
+    } catch (error) {
+      console.error("로그아웃 실패:", error);
+      router.push("/");
+    } finally {
+      setTimeout(() => {
+        setIsLoggingOut(false);
+      }, 500);
+    }
+  };
+
   const { data, isSuccess } = useQuery({
     queryKey: ["getMyData"],
     queryFn: getMyData,
+    enabled: !loginData,
+    retry: 1
   });
+
   useEffect(() => {
     setData(data);
   }, [isSuccess]);
+
+  useEffect(() => {
+    if (data) {
+      localStorage.removeItem('isLoggedOut');
+    }
+  }, [data]);
+
   return (
     <nav className={cn("navWrap")}>
       {page === "/workSpace" ? (
@@ -109,7 +142,7 @@ export default function GNB() {
             로그인
           </button>
         ) : (
-          <button className={cn("logOutBtn")}> 로그아웃</button>
+          <button className={cn("logOutBtn")} onClick={handleLogout}> 로그아웃</button>
         )}
       </div>
     </nav>

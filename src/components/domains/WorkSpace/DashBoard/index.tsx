@@ -69,7 +69,7 @@ export default function DashBoard({
     title: "새로운 항목",
     dueDate: nowDate,
     assigneeName: "담당자",
-    body: "내용",
+    body: "",
     statusName: "시작전",
     amount: 0,
   };
