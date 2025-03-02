@@ -90,7 +90,7 @@ export default function GNB() {
 
   return (
     <nav className={cn("navWrap")}>
-      {page === "/workSpace" ? (
+      {page === "/workSpace" || page === "/dashBoard" ? (
         <div
           className={cn("side")}
           onClick={() => setSideMenuState(!sideMenuState)}

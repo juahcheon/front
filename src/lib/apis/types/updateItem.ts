@@ -10,6 +10,7 @@ export interface UpdateItemPayload {
   body: string;
   statusName: string;
   amount: number;
+  attachedFileUrl: string | null;
 }
 
 export const updateItem = async (data: UpdateItemPayload) => {

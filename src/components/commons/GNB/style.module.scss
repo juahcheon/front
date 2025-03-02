@@ -58,4 +58,8 @@
   font-weight: 500;
   line-height: 140%; /* 25.2px */
   letter-spacing: -0.45px;
+
+  @media all and (max-width: 599px) {
+    display: none;
+  }
 }

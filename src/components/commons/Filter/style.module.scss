@@ -1,4 +1,53 @@
-$speed : 0.4s;
+$speed: 0.4s;
+
+.moWrap {
+  position: relative;
+  gap: 1rem;
+  display: none;
+  @media all and (max-width: 599px) {
+    display: flex;
+  }
+  & > div {
+    width: 10rem;
+  }
+  & .filterTitle {
+    padding: 0;
+    color: var(--Gray600, #756d80);
+    border-radius: 7px;
+    background: var(--Gray200, #f0eff2);
+    justify-content: center;
+
+    & img {
+      display: none;
+    }
+  }
+  & .filterWrap,
+  .filterWrapOff {
+    & > div {
+      padding: 0;
+    }
+  }
+  & .filterMo {
+    width: 20rem;
+    position: absolute;
+    z-index: 2;
+    top: 4.4rem;
+    height: fit-content;
+    background-color: #fff;
+    padding: 2rem;
+    border: 1px solid #6d6d80;
+    border-radius: 1rem;
+    transition: opacity $speed ease-out, max-height $speed ease-out;
+  }
+
+  & .filterMoOff {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    visibility: hidden; // 요소가 보이지 않도록 설정
+    pointer-events: none; // 클릭 막기
+  }
+}
 
 .filterTitle {
   width: 100%;

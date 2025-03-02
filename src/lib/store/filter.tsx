@@ -1,8 +1,9 @@
 import { create } from "zustand";
 
 interface FilterBox {
-  category: Record<string, boolean>; // 키-값 형태의 객체
-  progressStatus: Record<string, boolean>;
+  category: any[];
+  progressStatus: string;
+  assignee: string[];
 }
 
 interface WorkSpaceState {
@@ -11,7 +12,7 @@ interface WorkSpaceState {
 }
 
 const useFilterStore = create<WorkSpaceState>((set) => ({
-  filterBox: { category: {}, progressStatus: {} }, // 초기 상태 설정
+  filterBox: { category: [], progressStatus: "", assignee: [] }, // 초기 상태 설정
   setFilterBox: (newFilterBox) => set({ filterBox: newFilterBox }), // 상태 업데이트 함수
 }));
 

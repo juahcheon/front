@@ -4,6 +4,11 @@
       @content;
     }
   }
+  @if $breakpoint == mobile {
+    @media (max-width: 599px) {
+      @content;
+    }
+  }
 }
 
 $flex-map: (

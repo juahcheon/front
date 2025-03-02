@@ -7,7 +7,7 @@ import styles from "./style.module.scss";
 
 const cn = classNames.bind(styles);
 
-export default function Filter() {
+export default function MobileFilter() {
   const { filterBox, setFilterBox } = useFilterStore();
   const { sideMenuValue } = useSideMenuValStore();
 
@@ -65,10 +65,10 @@ export default function Filter() {
   };
 
   return (
-    <div>
-      <FilterShare item={category} func={handleCategoryChange} />
-      <ProgressFilter item={progressStatus} />
-      <FilterShare item={assignee} func={handleAssigneeChange} />
+    <div className={cn("moWrap")}>
+      <FilterShare item={category} func={handleCategoryChange} status={true} />
+      <ProgressFilter item={progressStatus} status={true} />
+      <FilterShare item={assignee} func={handleAssigneeChange} status={true} />
     </div>
   );
 }

@@ -2,6 +2,7 @@ import dot from "@/../public/icons/dot.svg";
 import moreBtn from "@/../public/icons/moreGray.svg";
 import DropDown from "@/components/commons/DropDown";
 import { addSmallCard, changeCardName, deleteCard } from "@/lib/apis/workSpace";
+import useFilterStore from "@/lib/store/filter";
 import useWorkSpaceStore from "@/lib/store/workSpace";
 import { useMutation } from "@tanstack/react-query";
 import classNames from "classnames/bind";
@@ -27,6 +28,7 @@ interface DashBoardProps {
       dueDate: string;
       assigneeName: string;
       statusName: string;
+      attachedFileUrl: string;
     }[];
   };
   memberData: any;
@@ -55,6 +57,7 @@ export default function DashBoard({
       (a, b) => Number(b.statusName) - Number(a.statusName)
     ) // statusName을 기준으로 정렬
   );
+  const { filterBox } = useFilterStore();
 
   const { register, handleSubmit } = useForm<IFormInput>();
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
@@ -124,7 +127,7 @@ export default function DashBoard({
 
     return () => clearTimeout(debounceTimeout);
   }, [searchWord, data.smallCatItems]);
-
+  console.log(filteredItems);
   return (
     <div
       className={
@@ -181,27 +184,34 @@ export default function DashBoard({
             className={cn("droppableContainer")}
           >
             {/* Draggable 아이템들 */}
-            {filteredItems.map((item, index) => (
-              <Draggable
-                key={item.id}
-                draggableId={item.id.toString()}
-                index={index}
-              >
-                {(provided) => (
-                  <div
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                  >
-                    <Card
-                      item={item}
-                      checklistId={data.checklistId}
-                      onOpenModal={onOpenModal}
-                    />
-                  </div>
-                )}
-              </Draggable>
-            ))}
+            {filteredItems
+              ?.filter(
+                (item: any) =>
+                  // assignee가 undefined이거나 비어있으면 모든 항목을 표시
+                  (filterBox.assignee && filterBox.assignee.length === 0) ||
+                  filterBox.assignee?.includes(item.assigneeName)
+              )
+              .map((item, index) => (
+                <Draggable
+                  key={item.id}
+                  draggableId={item.id.toString()}
+                  index={index}
+                >
+                  {(provided) => (
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                    >
+                      <Card
+                        item={item}
+                        checklistId={data.checklistId}
+                        onOpenModal={onOpenModal}
+                      />
+                    </div>
+                  )}
+                </Draggable>
+              ))}
             {provided.placeholder}
           </div>
         )}

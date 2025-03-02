@@ -53,10 +53,10 @@ export default function Card({ item, checklistId, onOpenModal }: Card) {
         </div>
 
         <div className={cn("title")} onClick={choice}>
-          <div
+          {/* <div
             className={cn("colorTag")}
             style={{ border: `1px solid ${color}`, background: color }}
-          ></div>
+          ></div> */}
           <h3>{item.title}</h3>
         </div>
         <div className={cn("assignee")}>

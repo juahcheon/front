@@ -7,6 +7,9 @@
   background-color: #fff;
   transform: translateX(-100%);
   transition: all 0.5s;
+  @media all and (max-width: 599px) {
+    display: none;
+  }
 }
 .wrap.active {
   transform: translateX(0);
