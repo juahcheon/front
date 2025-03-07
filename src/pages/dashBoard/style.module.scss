@@ -28,19 +28,31 @@
   width: 100%;
   background-color: white;
   border-radius: 1.5rem;
+  padding: 1rem;
   display: flex;
   justify-content: space-around;
-  padding: 2.8rem 0;
   text-align: center;
 
-  & > div > p {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-  }
+  & > div {
+    width: 100%;
+    height: 100%;
+    padding: 2.4rem 0;
+    border-radius: 1rem;
+    transition: 0.2s;
+    cursor: pointer;
 
-  & > div > span {
-    font-size: 1.9rem;
-    font-weight: bold;
+    &:hover {
+      background-color: #eee;
+    }
+    & > p {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+  
+    & > span {
+      font-size: 1.9rem;
+      font-weight: bold;
+    }
   }
 }
 
@@ -181,5 +193,42 @@
       position: absolute;
       right: 0;
     }
+  }
+}
+
+
+.assigneeNameWrap {
+  width: 100%;
+
+  & > p {
+    font-size: 2.4rem;
+    font-weight: bold;
+    margin-bottom: 2.4rem;
+  }
+}
+
+.assigneeNameContent {
+  display: flex;
+
+  & > div {
+    width: 50%;
+    height: 22.8rem;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 1.5rem;
+
+    & > p {
+      font-size: 5.8rem;
+      font-weight: 600;
+      margin-left: 6rem;
+    }
+  }
+
+  & > div:first-child {
+    margin-right: 2rem;
   }
 }

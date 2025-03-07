@@ -13,13 +13,11 @@ export default function MobileFilter() {
 
   // sideMenuValue.length 만큼 반복해서 항목을 구성합니다.
   const category = {
-    title: "항목",
+    title: "카테고리",
     item: Array.isArray(sideMenuValue)
       ? sideMenuValue.map((menu: { title: any }) => menu.title)
       : [], // 각 menu의 title을 추출해서 배열에 넣음
   };
-
-  console.log(filterBox);
 
   const assignee = {
     title: "담당자",

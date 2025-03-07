@@ -1,3 +1,30 @@
+.backgroundOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: transparent;
+  opacity: 0;
+  transition: background-color 0.3s ease-out, opacity 0.3s ease-out;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.secondPageContent,
+.thirdPageContent,
+.fourthPageContent {
+  background-color: transparent !important;
+  position: relative;
+  z-index: 1;
+}
+
+.indexWrap {
+  width: 100%;
+  height: 100vh;
+  padding-top: 7rem;
+}
+
 .indexBKG {
   position: relative;
   display: flex;
@@ -39,4 +66,128 @@
   border-radius: 3rem;
   color: white;
   font-weight: bold;
+}
+
+.pageContainer {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.page {
+  width: 100%;
+  height: 100vh;
+  scroll-snap-align: start;
+  position: relative;
+  overflow: hidden;
+}
+
+.scrollArrow {
+  position: fixed;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+    transform: scale(1.1);
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.upArrow {
+  top: 90px;
+  left: 50%;
+}
+
+.downArrow {
+  bottom: 20px;
+  left: 50%;
+}
+
+.secondPageContent,
+.thirdPageContent,
+.fourthPageContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 10rem;
+  line-height: 1.6;
+  // color: white;
+  display: flex;
+  justify-content: space-between;
+  gap: 10.9rem;
+}
+
+.secondPageSentence,
+.thirdPageSentence,
+.foruthPageSentence {
+  width: 100%;
+  height: 37rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2.4rem;
+  flex: 2;
+  // margin-right: 15rem;
+
+  & > h2 {
+    color: var(--Gray700, #4f4f4f);
+    font-family: Pretendard;
+    font-size: 4rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 140%; /* 56px */
+    letter-spacing: -0.4px;
+  }
+
+  & > p {
+    font-size: 1.8rem;
+  }
+}
+
+.startBtn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #357ab8;
+  }
+}
+.secondPageContent {
+  background-color: #f8f7f9 !important;
+}
+.imgCover {
+  position: relative;
+  width: 60rem;
+  height: 33rem;
+  flex: 2;
+}
+.miniTitle {
+  color: var(--Primary-Color, #7034f3);
+  font-family: Pretendard;
+  font-size: 2.4rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%; /* 33.6px */
+  letter-spacing: -0.24px;
+  margin-bottom: -2rem;
 }

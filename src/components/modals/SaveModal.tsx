@@ -1,24 +1,26 @@
-import classNames from "classnames/bind";
 import styles from "@/pages/workSpace/style.module.scss";
-import Image from "next/image";
-import icon from "@/../public/icons/alert-icon.gif"
+import classNames from "classnames/bind";
 
 const cn = classNames.bind(styles);
 
 type SaveModalProps = {
-  onClose: () => void
-}
+  onClose: () => void;
+  statusName: string;
+};
 
-export default function SaveModal({ onClose }:SaveModalProps) {
-
+export default function SaveModal({ onClose, statusName }: SaveModalProps) {
+  
   return (
     <div className={cn("saveModalWrap")}>
       <div className={cn("saveModal")}>
-        <p>체킹 완료!
-          <br /> 결혼 준비 고수가 되어가고 있어요
+        <p>
+          플랜 완료!
+          <br /> 준비가 착착 진행되고 있어요.
         </p>
-        <button type="button" className={cn("saveModalBtn")} onClick={onClose}>확인</button>
+        <button type="button" className={cn("saveModalBtn")} onClick={onClose}>
+          수고했어요
+        </button>
       </div>
     </div>
-  )
-};
+  );
+}

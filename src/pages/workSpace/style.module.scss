@@ -20,10 +20,6 @@
   display: flex;
   gap: 2.7rem;
 
-  & > img {
-    border-radius: 99px;
-  }
-
   & > h2 {
     color: black;
     font-size: 3.6rem;
@@ -44,24 +40,75 @@
     }
   }
 }
+.profileImg {
+  position: relative;
+  & img {
+    border-radius: 99px;
+  }
+  & input {
+    display: none;
+  }
+  // & button {
+  //   position: absolute;
+  //   bottom: 0;
+  //   left: 0;
+  // }
+}
+.profileChange {
+  display: none;
+}
+.profileImg:hover .profileChange {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  border-radius: 99px;
+  left: 50%;
+  top: 0%;
+  transform: translate(-50%, 0%);
+  background-color: rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 16.9rem;
+  font-size: 2rem;
+}
 
 .dDay {
-  color: #000;
+  color: #756d80;
   font-size: 2rem;
   font-weight: 700;
   align-self: flex-end;
+  & > p {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  & span {
+    display: flex;
+  }
   @media all and (max-width: 599px) {
     font-size: 1.3rem;
   }
+  & span {
+    cursor: pointer;
+  }
+  // & span {
+  //   color: red;
+  // }
 }
 
 .ddayNum {
-  font-family: Quicksand;
-  color: #000;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: Quicksand !important;
+  color: #756d80;
   font-size: 6.8rem;
   font-weight: 700;
   & span {
     color: #7034f3;
+    display: flex;
+    align-items: baseline;
   }
   @media all and (max-width: 599px) {
     font-size: 3.6rem;
@@ -71,19 +118,20 @@
 .dashWrap {
   overflow-x: scroll;
   display: flex;
-  gap: 5rem;
+  gap: 3rem;
   position: relative;
+  padding-right: 10rem;
 
   /* 우측으로 갈수록 점점 투명해지는 효과 (얇게 적용) */
   -webkit-mask-image: linear-gradient(
     to right,
-    rgba(0, 0, 0, 1) 97%,
+    rgba(0, 0, 0, 1) 100%,
     rgba(0, 0, 0, 0) 100%
   );
   mask-image: linear-gradient(
     to right,
-    rgba(0, 0, 0, 1) 97%,
-    rgba(0, 0, 0, 0) 100%
+    rgba(0, 0, 0, 1) 70%,
+    rgba(0, 0, 0, 0.3) 100%
   );
 }
 
@@ -147,5 +195,9 @@
   }
 }
 .dDayChange {
-  width: 12rem;
+  width: fit-content;
+  font-size: 2rem;
+}
+.change {
+  text-align: right;
 }

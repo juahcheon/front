@@ -9,6 +9,10 @@ import { useQuery } from "@tanstack/react-query";
 import classNames from "classnames/bind";
 import { useEffect, useState } from "react";
 import styles from "./style.module.scss";
+import Image from "next/image";
+
+import bride from "@/../public/images/dashBoard-bride.png"
+import groom from "@/../public/images/dashBoard-groom.png"
 
 const cn = classNames.bind(styles);
 
@@ -69,6 +73,19 @@ export default function DashBoard() {
               onOpenModal={handleOpenModal}
             />
           )}
+          <div className={cn("assigneeNameWrap")}>
+            <p>담당자</p>
+            <div className={cn("assigneeNameContent")}>
+              <div>
+                <Image src={groom} alt="담당자 신부인 리스트" width={193} height={230} />
+                <p>10개</p>
+              </div>
+              <div>
+                <Image src={bride} alt="담당자 신랑인 리스트" width={193} height={230} />
+                <p>5개</p>
+              </div>
+            </div>
+          </div>
         </div>
       </main>
       <SideMenu state={sideMenuState} />

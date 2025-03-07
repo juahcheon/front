@@ -18,9 +18,9 @@ export default function GNB() {
   const { data: session } = useSession();
   const { sideMenuState, setSideMenuState } = useSideMenuStore();
   const { data: loginData, setData } = useLoginData();
-  const [ page, setPage ] = useState<String>("");
+  const [page, setPage] = useState<String>("");
   const router = useRouter();
-  const [ isLoggingOut, setIsLoggingOut ] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   useEffect(() => {
     setPage(router.pathname);
@@ -54,10 +54,10 @@ export default function GNB() {
     setIsLoggingOut(true);
     setData(null);
     try {
-      localStorage.setItem('isLoggedOut', 'true');
-      localStorage.removeItem('userData');
-      localStorage.removeItem('isLoggedIn');
-      
+      localStorage.setItem("isLoggedOut", "true");
+      localStorage.removeItem("userData");
+      localStorage.removeItem("isLoggedIn");
+
       await logoutAPI();
 
       router.push("/");
@@ -75,7 +75,7 @@ export default function GNB() {
     queryKey: ["getMyData"],
     queryFn: getMyData,
     enabled: !loginData,
-    retry: 1
+    retry: 1,
   });
 
   useEffect(() => {
@@ -84,7 +84,7 @@ export default function GNB() {
 
   useEffect(() => {
     if (data) {
-      localStorage.removeItem('isLoggedOut');
+      localStorage.removeItem("isLoggedOut");
     }
   }, [data]);
 
@@ -129,7 +129,7 @@ export default function GNB() {
               height={50}
             />
           </Link>
-          <Link className={cn("aboutWeddy")} href="/">
+          <Link className={cn("aboutWeddy")} href="/#2">
             <p>웨디 소개</p>
           </Link>
         </div>
@@ -142,7 +142,10 @@ export default function GNB() {
             로그인
           </button>
         ) : (
-          <button className={cn("logOutBtn")} onClick={handleLogout}> 로그아웃</button>
+          <button className={cn("logOutBtn")} onClick={handleLogout}>
+            {" "}
+            로그아웃
+          </button>
         )}
       </div>
     </nav>

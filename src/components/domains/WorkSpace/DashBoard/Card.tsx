@@ -1,5 +1,5 @@
-import date from "@/../public/icons/date.svg";
-import assignee from "@/../public/icons/people.svg";
+import date from "@/../public/icons/date2.svg";
+import assignee from "@/../public/icons/people2.svg";
 import useCardStore from "@/lib/store/choiceCard";
 import useColorStore from "@/lib/store/mainColor";
 import classNames from "classnames/bind";
@@ -39,7 +39,6 @@ export default function Card({ item, checklistId, onOpenModal }: Card) {
     <>
       <div
         className={item.statusName ? cn("cardWrap") : cn("cardWrapNone")}
-        style={{ border: `1px solid ${color}` }}
         onClick={handleOpenModal}
       >
         <div
@@ -60,12 +59,12 @@ export default function Card({ item, checklistId, onOpenModal }: Card) {
           <h3>{item.title}</h3>
         </div>
         <div className={cn("assignee")}>
-          <Image src={assignee} alt="담당자" width={16} height={16} />
-          <p>{item.assigneeName}</p>
+          <Image src={assignee} alt="담당자" width={26} height={26} />
+          <p>{item.assigneeName ? item.assigneeName : "담당자"}</p>
         </div>
         <div className={cn("date")}>
-          <Image src={date} alt="날짜" width={16} height={16} />
-          <p>{itemDate}</p>
+          <Image src={date} alt="날짜" width={26} height={26} />
+          <p>{itemDate ? itemDate : "마감일자"}</p>
         </div>
       </div>
     </>

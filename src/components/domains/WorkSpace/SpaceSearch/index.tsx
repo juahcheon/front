@@ -1,8 +1,9 @@
 import searchImg from "@/../public/icons/searchImg.svg";
+import searchImg2 from "@/../public/icons/searchImg2.svg";
 import useWorkSpaceStore from "@/lib/store/workSpace";
 import classNames from "classnames/bind";
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import styles from "./style.module.scss";
 
@@ -17,6 +18,7 @@ interface searchProps {
 }
 
 export default function SpaceSearch({ placeholder }: searchProps) {
+  const [isFocused, setIsFocused] = useState(false);
   const { searchWord, setSearchWord } = useWorkSpaceStore();
   const { register, handleSubmit, watch } = useForm<IFormInput>();
   const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
@@ -29,13 +31,19 @@ export default function SpaceSearch({ placeholder }: searchProps) {
     <form className={cn("searchInput")} onSubmit={handleSubmit(onSubmit)}>
       <label htmlFor="search">
         <button type="submit">
-        <Image src={searchImg} alt="검색버튼" width={26} height={26} />
+          {isFocused ? (
+            <Image src={searchImg2} alt="검색버튼" width={26} height={26} />
+          ) : (
+            <Image src={searchImg} alt="검색버튼" width={26} height={26} />
+          )}
         </button>
       </label>
       <input
         placeholder={placeholder}
         id="search"
         {...register("searchWord")}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
       />
     </form>
   );

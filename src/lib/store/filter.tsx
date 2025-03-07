@@ -12,8 +12,8 @@ interface WorkSpaceState {
 }
 
 const useFilterStore = create<WorkSpaceState>((set) => ({
-  filterBox: { category: [], progressStatus: "", assignee: [] }, // 초기 상태 설정
-  setFilterBox: (newFilterBox) => set({ filterBox: newFilterBox }), // 상태 업데이트 함수
+  filterBox: { category: [], progressStatus: "", assignee: [] },
+  setFilterBox: (newFilterBox) => set({ filterBox: newFilterBox }),
 }));
 
 export default useFilterStore;

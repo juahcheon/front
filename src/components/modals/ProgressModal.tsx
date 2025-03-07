@@ -1,4 +1,8 @@
+import arrow1 from "@/../public/icons/arrow1.svg";
+import arrow2 from "@/../public/icons/arrow2.svg";
+import arrow3 from "@/../public/icons/arrow3.svg";
 import classNames from "classnames/bind";
+import Image from "next/image";
 import { useState } from "react";
 import styles from "./style.module.scss";
 
@@ -28,7 +32,31 @@ export default function ProgressModal({ item, onChange }: any) {
         onClick={() => setIsModalOpen(!isModalOpen)}
       >
         <p>{currentStatus}</p>
-        <span>∨</span>
+        {currentStatus === "시작전" ? (
+          <Image
+            src={arrow1}
+            width={20}
+            height={20}
+            alt="화살표"
+            className={cn("modalSpan")}
+          />
+        ) : currentStatus === "진행중" ? (
+          <Image
+            src={arrow2}
+            width={20}
+            height={20}
+            alt="화살표"
+            className={cn("modalSpan")}
+          />
+        ) : (
+          <Image
+            src={arrow3}
+            width={20}
+            height={20}
+            alt="화살표"
+            className={cn("modalSpan")}
+          />
+        )}
       </button>
 
       {isModalOpen && (
@@ -50,7 +78,32 @@ export default function ProgressModal({ item, onChange }: any) {
                   }
                 >
                   {statusName}
-                  <span className={cn("modalSpan")}>∨</span>
+                  {/* <span className={cn("modalSpan")}>∨</span> */}
+                  {statusName === "시작전" ? (
+                    <Image
+                      src={arrow1}
+                      width={20}
+                      height={20}
+                      alt="화살표"
+                      className={cn("modalSpan")}
+                    />
+                  ) : statusName === "진행중" ? (
+                    <Image
+                      src={arrow2}
+                      width={20}
+                      height={20}
+                      alt="화살표"
+                      className={cn("modalSpan")}
+                    />
+                  ) : (
+                    <Image
+                      src={arrow3}
+                      width={20}
+                      height={20}
+                      alt="화살표"
+                      className={cn("modalSpan")}
+                    />
+                  )}
                 </button>
               </li>
             ))}

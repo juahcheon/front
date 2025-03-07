@@ -11,6 +11,9 @@
   background-color: #fff;
   border-bottom: 1px solid var(--Gray300, #e5e2e8);
   background: #fff;
+  transform: var(--gnb-transform);
+  opacity: var(--gnb-opacity);
+  transition: var(--gnb-transition);
 }
 
 .linkWrap {

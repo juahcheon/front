@@ -35,6 +35,7 @@ interface DashBoardProps {
   setCard: any;
   num: number;
   onOpenModal: (item: any) => void;
+  setCardLength: any;
 }
 
 interface IFormInput {
@@ -47,6 +48,7 @@ export default function DashBoard({
   setCard,
   num,
   onOpenModal,
+  setCardLength,
 }: DashBoardProps) {
   const { searchWord, setSearchWord } = useWorkSpaceStore();
   const [dotDrop, setDotDrop] = useState<boolean>(false);
@@ -91,6 +93,7 @@ export default function DashBoard({
       setCard((prev: any) => {
         const newCard = [...prev];
         newCard.splice(num, 1);
+        setCardLength((prev: any) => prev + 1);
         return newCard;
       }),
   });
@@ -127,7 +130,7 @@ export default function DashBoard({
 
     return () => clearTimeout(debounceTimeout);
   }, [searchWord, data.smallCatItems]);
-  console.log(filteredItems);
+  // console.log(filteredItems);
   return (
     <div
       className={
